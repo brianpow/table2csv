@@ -13,7 +13,8 @@
         quoteFields: true,
         trimContent: true,
         excludeColumns: "",
-        excludeRows: ""
+        excludeRows: "",
+        visibleOnly: true
     };
 
     let options = {};
@@ -41,10 +42,10 @@
 
         const rows = table.find("tr").not(options.excludeRows);
 
-        const numCols = rows.first().find("td,th").filter(":visible").not(options.excludeColumns).length;
+        const numCols = rows.first().find("td,th").filter((options.visibleOnly)?":visible":"*").not(options.excludeColumns).length;
 
         rows.each(function (ignore, elem) {
-            $(elem).find("td,th").filter(":visible").not(options.excludeColumns)
+            $(elem).find("td,th").filter((options.visibleOnly)?":visible":"*").not(options.excludeColumns)
                 .each(function (i, col) {
                     const column = $(col);
 

@@ -138,6 +138,10 @@ jQuery selector for the rows you don't want to export in the csv (tipically a li
 `default: true`   
 Trims the content of individual \<th>, \<td> tags of whitespaces. This will produce valid output even if the table is indented.
 
+* visibleOnly
+`default: true`
+Apply jQuery selector ":visible" on td/th.
+
 #### Download options
 
 These options apply only when the 'download' action is used

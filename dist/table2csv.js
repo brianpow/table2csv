@@ -1,6 +1,6 @@
 "use strict";
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 (function ($) {
   "use strict";
@@ -18,7 +18,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     quoteFields: true,
     trimContent: true,
     excludeColumns: "",
-    excludeRows: ""
+    excludeRows: "",
+    visibleOnly: true
   };
   var options = {};
 
@@ -40,9 +41,9 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   function convert(table) {
     var output = "";
     var rows = table.find("tr").not(options.excludeRows);
-    var numCols = rows.first().find("td,th").filter(":visible").not(options.excludeColumns).length;
+    var numCols = rows.first().find("td,th").filter(options.visibleOnly ? ":visible" : "*").not(options.excludeColumns).length;
     rows.each(function (ignore, elem) {
-      $(elem).find("td,th").filter(":visible").not(options.excludeColumns).each(function (i, col) {
+      $(elem).find("td,th").filter(options.visibleOnly ? ":visible" : "*").not(options.excludeColumns).each(function (i, col) {
         var column = $(col); // Strip whitespaces
 
         var content = options.trimContent ? $.trim(column.text()) : column.text();
